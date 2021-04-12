@@ -1,0 +1,32 @@
+.contactList {
+  text-align: start;
+}
+
+.contact_list_item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.contact_list_item_button {
+  width: 70px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: 500px;
+  border-radius: 8px;
+}
+.contact_list_item_button:hover,
+.contact_list_item_button:focus {
+  background-color: #0000ff;
+}
+
+.contact_list_item_name,
+.contact_list_item_number {
+  width: 250px;
+  height: 40px;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 700px;
+  display: flex;
+  align-items: center;
+}
