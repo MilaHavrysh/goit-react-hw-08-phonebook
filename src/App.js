@@ -8,6 +8,7 @@ import routes from './routes';
 import { GetCurrentUser } from './redux/auth/auth-operations';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const SignUpView = lazy(() =>
   import('./views/SignUpView/SignUpView' /*webpackChunkName: "SignUpView"*/),
 );
@@ -31,8 +32,18 @@ const App = () => {
       <AppBar />
       <Suspense fallback={<p>...Loading</p>}>
         <Switch>
-          <Route exact path={routes.home} component={HomePage} />
-          <Route path={routes.register} component={SignUpView} />
+          <PublicRoute
+            exact
+            path={routes.home}
+            redirectTo="/"
+            component={HomePage}
+          />
+          <PublicRoute
+            path={routes.register}
+            restricted
+            redirectTo="/contacts"
+            component={SignUpView}
+          />
           <PublicRoute
             path={routes.login}
             restricted
@@ -42,7 +53,7 @@ const App = () => {
           <PrivateRoute
             path={routes.contacts}
             component={ContactsUserView}
-            redirectTo={'/login'}
+            redirectTo={'/contacts'}
           />
         </Switch>
       </Suspense>

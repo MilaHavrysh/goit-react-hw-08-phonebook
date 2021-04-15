@@ -1,0 +1,14 @@
+.contacts_view_main_title {
+  margin-top: 50px;
+  text-decoration: underline;
+}
+
+.contacts_view_contacts_title {
+  margin-top: 50px;
+}
+
+.contacts_view_filter_title {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-style: italic;
+}

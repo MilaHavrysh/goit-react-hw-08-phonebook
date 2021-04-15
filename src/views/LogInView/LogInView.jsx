@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { LogInUser } from '../../redux/auth/auth-operations';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
+import style from './LogInView.module.css';
 
 const LogInView = () => {
   const [mail, setMail] = useState(null);
@@ -9,9 +13,9 @@ const LogInView = () => {
   const dispatch = useDispatch();
 
   const InputLogInChange = e => {
-    if (e.target.attributes.id.value === 'mail') {
+    if (e.target.attributes.id.value === 'formBasicEmail') {
       setMail(e.target.value);
-    } else if (e.target.attributes.id.value === 'password') {
+    } else if (e.target.attributes.id.value === 'formBasicPassword') {
       setPassword(e.target.value);
     }
   };
@@ -27,7 +31,41 @@ const LogInView = () => {
   };
 
   return (
-    <form>
+    <div className={style.log_in_container}>
+      <Form>
+        <FormGroup controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            className={style.log_in_input}
+            type="email"
+            placeholder="Enter email"
+            onChange={InputLogInChange}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </FormGroup>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            className={style.log_in_input}
+            type="password"
+            placeholder="Password"
+            onChange={InputLogInChange}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
+    </div>
+  );
+};
+
+export default LogInView;
+
+/*<form>
       <label htmlFor="mail">Email</label>
       <input
         type="text"
@@ -47,8 +85,4 @@ const LogInView = () => {
       <button type="submit" onClick={handleSubmit}>
         Log In
       </button>
-    </form>
-  );
-};
-
-export default LogInView;
+    </form>*/

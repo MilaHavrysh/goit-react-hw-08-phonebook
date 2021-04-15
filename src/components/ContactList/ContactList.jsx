@@ -1,5 +1,3 @@
-//import { connect } from 'react-redux';
-//import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './ContactList.module.css';
 import {
@@ -11,6 +9,7 @@ import {
   getVisibleContacts,
   getLoading,
 } from '../../redux/contacts/contacts-selectors';
+import { Button } from 'react-bootstrap';
 
 const ContactList = () => {
   const items = useSelector(getVisibleContacts);
@@ -27,13 +26,14 @@ const ContactList = () => {
           <li key={element.id} className={styles.contact_list_item}>
             <p className={styles.contact_list_item_name}>{element.name}</p>
             <p className={styles.contact_list_item_number}>{element.number}</p>
-            <button
+            <Button
               className={styles.contact_list_item_button}
+              variant="primary"
               type="button"
               onClick={() => dispatch(DeleteContact(element.id))}
             >
               delete
-            </button>
+            </Button>
           </li>
         ))}
       </ul>
@@ -42,9 +42,6 @@ const ContactList = () => {
 };
 
 export default ContactList;
-
-
-
 
 /*-------------------- Без useSelector и useDispatch-------------------------*/
 

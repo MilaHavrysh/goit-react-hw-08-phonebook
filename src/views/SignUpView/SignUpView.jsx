@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ReguisterUser } from '../../redux/auth/auth-operations';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
+import style from './SignUpView.module.css';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -10,11 +14,11 @@ const SignUp = () => {
   const dispatch = useDispatch();
 
   const inputRegisterChange = e => {
-    if (e.target.attributes.id.value === 'name') {
+    if (e.target.attributes.id.value === 'formBasicName') {
       setName(e.target.value);
-    } else if (e.target.attributes.id.value === 'mail') {
+    } else if (e.target.attributes.id.value === 'formBasicEmail') {
       setEmail(e.target.value);
-    } else if (e.target.attributes.id.value === 'password') {
+    } else if (e.target.attributes.id.value === 'formBasicPassword') {
       setPassword(e.target.value);
     }
   };
@@ -28,11 +32,59 @@ const SignUp = () => {
     };
     console.log(user);
     dispatch(ReguisterUser(user));
+    setName('');
+    setEmail('');
+    setPassword('');
     return user;
   };
 
   return (
-    <form>
+    <div className={style.sign_up_container}>
+      <Form>
+        <FormGroup controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            className={style.sign_up_input}
+            type="name"
+            autoComplete="off"
+            placeholder="Name"
+            onChange={inputRegisterChange}
+            value={name}
+          />
+        </FormGroup>
+        <FormGroup controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            className={style.sign_up_input}
+            type="email"
+            autoComplete="off"
+            placeholder="Enter email"
+            onChange={inputRegisterChange}
+            value={email}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </FormGroup>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            className={style.sign_up_input}
+            type="password"
+            autoComplete="off"
+            placeholder="Password"
+            onChange={inputRegisterChange}
+            value={password}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
+    </div>
+  );
+  /*<form>
       <label htmlFor="name">Name</label>
       <input
         type="text"
@@ -59,8 +111,7 @@ const SignUp = () => {
       <button type="submit" onClick={handleSubmit}>
         Sign Up
       </button>
-    </form>
-  );
+    </form>*/
 };
 
 export default SignUp;
